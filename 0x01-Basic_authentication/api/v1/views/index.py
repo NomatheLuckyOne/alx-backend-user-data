@@ -30,4 +30,4 @@ def stats() -> str:
 def unauthorized() -> str:
     """ implement an unauthorised
     """
-    abort(401)
+    return abort(401)
