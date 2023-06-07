@@ -31,3 +31,11 @@ def unauthorized() -> str:
     """ implement an unauthorised
     """
     return abort(401)
+
+
+@app_views.route('/forbidden', strict-slashes=False)
+def forbidden() -> str:
+    """
+    forbids access
+    """
+    return abort(403)
