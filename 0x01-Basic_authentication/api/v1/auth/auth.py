@@ -10,9 +10,19 @@ class Auth:
     """Auth template"""
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
-        """checksnif a user is authenticated"""
+        """checks if a user is authenticated"""
 
-        return False
+        if path is None or excluded_paths is None:
+            return True
+
+        for i in excluded_paths:
+            if path.startswith(i[:-1]) and i.endswith('*'):
+                return False
+
+            elif i in {path, path + '/'}:
+                return False
+
+        return True
 
     def authorization_header(self, request=None) -> str:
         """Authorization hearder function"""
