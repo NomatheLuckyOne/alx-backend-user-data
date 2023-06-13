@@ -38,3 +38,14 @@ class DB:
         self._session.add(user_info)
         self._session.commit()
         return user_info
+
+    def find_user(self, **kwargs) -> User:
+        """find user on the db"""
+
+        try:
+            value = self._session.query(User).filter_by(**kwargs).first()
+        except TypeError:
+            raise InvalidRequestError
+        if value is None:
+            raise NoResultFound
+        return value
